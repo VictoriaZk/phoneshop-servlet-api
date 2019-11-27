@@ -4,6 +4,12 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <tags:master pageTitle="Product List">
+    <p>
+        <jsp:include page="/cart/minicart"/>
+        <c:if test="${not empty errorMessage}">
+            <%@ include file="../fragments/miniCart.jsp" %>
+        </c:if>
+    </p>
     <table>
         <thead>
         <tr>
@@ -28,19 +34,18 @@
     <form method="post" action="${thisPage}">
         <p>
             <c:if test="${not empty param.success}">
-                <span style="color: green">Successfully added</span>
+                <p class="class-color-green">Successfully added</p>
                 <br>
             </c:if>
             <span>Quantity: </span>
-            <input name="quantity" value="${empty quantity ? 1 : quantity}" style="text-align: right"/>
+            <input name="quantity" value="${empty quantity ? 1 : quantity}" class="quantity"/>
             <button type="submit">Add</button>
             <c:if test="${not empty errorMessage}">
                 <br>
-                <span style="color: red">${errorMessage}</span>
+                <p class="class-color-red">${errorMessage}</p>
             </c:if>
         </p>
     </form>
 
     <tags:recentlyViewed products="${recentlyViewedProducts}"/>
 </tags:master>
-
