@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Locale;
-import java.util.NoSuchElementException;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -100,7 +99,7 @@ public class HttpSessionCartServiceTest {
         cartService.delete(cart, product);
         assertTrue(cart.getCartItems().isEmpty());
     }
-    
+
     @Test
     public void testCalculateTotalPrice() {
         Cart cart = new Cart();

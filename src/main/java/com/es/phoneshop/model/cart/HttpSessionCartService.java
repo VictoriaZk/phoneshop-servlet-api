@@ -132,4 +132,10 @@ public class HttpSessionCartService implements CartService {
         }
         return cart;
     }
+
+    @Override
+    public void clear(Cart cart) {
+        cart.getCartItems().clear();
+        cart.setTotalPrice(BigDecimal.ZERO);
+    }
 }

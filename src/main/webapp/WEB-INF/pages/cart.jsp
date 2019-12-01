@@ -83,4 +83,10 @@
             <p class = "class-color-black">Your cart is empthy!</p>
         </c:if>
     </form>
+    <p>
+    <form>
+        <c:url value="/checkout" var="checkoutUrl"/>
+        <button formaction="${checkoutUrl}">Checkout</button>
+    </form>
+    </p>
 </tags:master>

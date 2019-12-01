@@ -17,4 +17,5 @@ public interface CartService {
     Map<Long, String> update(HttpSession session, Cart cart, String[] productIds, String[] quantities, Locale locale)
             throws LackOfStockException, IllegalQuantityException, NumberFormatException;
     void delete(Cart cart, Product product);
+    void clear(Cart cart);
 }
