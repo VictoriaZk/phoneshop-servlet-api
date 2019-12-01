@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class OrderOverviewServlet extends HttpServlet {
-    public static final String ORDER = "order";
     private OrderDao orderDao;
 
     @Override
@@ -28,7 +27,7 @@ public class OrderOverviewServlet extends HttpServlet {
         } catch (OrderNotFoundException e) {
             e.printStackTrace();
         }
-        request.setAttribute(ORDER, order);
+        request.setAttribute("order", order);
         request.getRequestDispatcher("/WEB-INF/pages/orderOverview.jsp").forward(request, response);
     }
 

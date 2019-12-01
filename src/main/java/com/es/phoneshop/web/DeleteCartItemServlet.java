@@ -6,6 +6,7 @@ import com.es.phoneshop.model.cart.HttpSessionCartService;
 import com.es.phoneshop.model.product.ArrayListProductDao;
 import com.es.phoneshop.model.product.Product;
 import com.es.phoneshop.model.product.ProductDao;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,13 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class DeleteCartItemServlet extends HttpServlet {
-    public static final String CART = "cart";
+
     private ProductDao productDao;
+
     private CartService cartService;
 
     @Override
-    public void init() throws ServletException {
-        super.init();
+    public void init() {
         productDao = ArrayListProductDao.getInstance();
         cartService = HttpSessionCartService.getInstance();
     }
@@ -27,7 +28,7 @@ public class DeleteCartItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute(CART, cartService.getCart(request.getSession()));
+        request.setAttribute("cart", cartService.getCart(request.getSession()));
         request.getRequestDispatcher("/WEB-INF/pages/cart.jsp").forward(request, response);
     }
 
@@ -38,7 +39,6 @@ public class DeleteCartItemServlet extends HttpServlet {
         Cart cart = cartService.getCart(request.getSession());
         cartService.delete(cart, product);
         cartService.calculateTotalPrice(cart);
-        cartService.calculateTotalQuantity(cart);
         doGet(request, response);
     }
 

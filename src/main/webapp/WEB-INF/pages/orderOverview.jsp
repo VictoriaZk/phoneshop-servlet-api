@@ -44,7 +44,7 @@
             </tr>
         </c:forEach>
         <tr>
-            <td colspan="3" style="text-align: right">
+            <td colspan="3" class="price">
                 Price of products:
             </td>
             <td>
@@ -81,5 +81,3 @@
         <span>Total price: ${order.totalPrice}</span>
     </p>
 </tags:master>
-
-
