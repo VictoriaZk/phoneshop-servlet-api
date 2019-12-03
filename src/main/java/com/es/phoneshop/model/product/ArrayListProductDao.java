@@ -2,6 +2,7 @@ package com.es.phoneshop.model.product;
 
 import com.es.phoneshop.model.cart.HttpSessionCartService;
 import com.es.phoneshop.model.exception.ProductNotFoundException;
+
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -101,6 +102,10 @@ public class ArrayListProductDao implements ProductDao {
             comparator = comparator.reversed();
         }
         return comparator;
+    }
+
+    public void deleteAll() {
+        products.clear();
     }
 
 }

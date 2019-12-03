@@ -7,13 +7,13 @@
 
 <tags:master pageTitle="Cart">
     <c:if test="${not empty paramValues.success}">
-            <p class = "class-color-green">Successfully updated</p>
+        <p class="class-color-green">Successfully updated</p>
     </c:if>
     <c:if test="${not empty success}">
-            <p class ="class-color-red">Updating error</p>
+        <p class="class-color-red">Updating error</p>
     </c:if>
     <form method="post">
-        <c:if test ="${cart.totalQuantity!=0}">
+    <c:if test="${cart.totalQuantity!=0}">
         <table>
             <thead>
             <tr>
@@ -51,7 +51,7 @@
                                                                     : quantities[status.index]}"/>
                         <c:if test="${errors[status.index] ne null}">
                             <br>
-                            <p class = "class-color-red">${errors[status.index]}</p>
+                            <p class="class-color-red">${errors[status.index]}</p>
                         </c:if>
                     </td>
                     <td class="price">
@@ -74,13 +74,19 @@
                 </td>
             </tr>
         </table>
+        </form>
         <p>
             <c:url value="/cart" var="updateUrl"/>
             <button formaction="${updateUrl}">Update</button>
         </p>
-        </c:if>
-        <c:if test="${cart.totalQuantity == 0}">
-            <p class = "class-color-black">Your cart is empthy!</p>
-        </c:if>
-    </form>
+        <p>
+        <form>
+            <c:url value="/checkout" var="checkoutUrl"/>
+            <button formaction="${checkoutUrl}">Checkout</button>
+        </form>
+        </p>
+    </c:if>
+    <c:if test="${cart.totalQuantity == 0}">
+        <p class="class-color-black">Your cart is empthy!</p>
+    </c:if>
 </tags:master>

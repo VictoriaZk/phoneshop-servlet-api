@@ -6,6 +6,7 @@ import com.es.phoneshop.model.cart.HttpSessionCartService;
 import com.es.phoneshop.model.exception.IllegalQuantityException;
 import com.es.phoneshop.model.exception.LackOfStockException;
 import com.es.phoneshop.model.product.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,7 @@ public class ProductDetailsPageServlet extends HttpServlet {
         super.init();
         productDao = ArrayListProductDao.getInstance();
         viewedProducts = HttpSessionViewedProductService.getInstance();
-        cartService =  HttpSessionCartService.getInstance();
+        cartService = HttpSessionCartService.getInstance();
     }
 
     @Override
@@ -50,16 +51,14 @@ public class ProductDetailsPageServlet extends HttpServlet {
         Locale locale = request.getLocale();
         try {
             String resultOfAddingProductInCart = cartService.add(request.getSession(), cart, productId, quantity, locale);
-        }  catch (LackOfStockException e) {
+        } catch (LackOfStockException e) {
             sendError("Error of stock! Max stock is " + productDao.getProduct(productId).getStock(),
                     request, response);
             return;
-        }
-        catch (IllegalQuantityException e) {
+        } catch (IllegalQuantityException e) {
             sendError("Quantity should be greater then 0!", request, response);
             return;
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             sendError("Quantity should be a number", request, response);
             return;
         }
@@ -73,7 +72,7 @@ public class ProductDetailsPageServlet extends HttpServlet {
         doGet(request, response);
     }
 
-    private Long extractId(HttpServletRequest request){
+    private Long extractId(HttpServletRequest request) {
         return Long.parseLong(request.getPathInfo().replaceAll("/", ""));
     }
 }

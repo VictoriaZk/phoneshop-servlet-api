@@ -9,7 +9,8 @@ public class HttpSessionViewedProductService implements ViewedProductsService {
     private static final int MAX_VIEWED_PRODUCTS_ON_THE_PAGE = 5;
     private static HttpSessionViewedProductService INSTANCE = new HttpSessionViewedProductService();
 
-    private HttpSessionViewedProductService() {}
+    private HttpSessionViewedProductService() {
+    }
 
     public static HttpSessionViewedProductService getInstance() {
         return INSTANCE;

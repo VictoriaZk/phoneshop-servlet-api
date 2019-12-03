@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Locale;
+
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -49,9 +51,10 @@ public class CartPageServletTest {
         servlet = new CartPageServlet();
         servlet.init();
         productDao = ArrayListProductDao.getInstance();
+        ((ArrayListProductDao) productDao).deleteAll();
         cartService = HttpSessionCartService.getInstance();
         cart = new Cart();
-        productIds= new String[]{"1"};
+        productIds = new String[]{"1"};
         quantities = new String[]{"5"};
         when(request.getRequestDispatcher(anyString())).thenReturn(requestDispatcher);
         when(request.getSession()).thenReturn(session);

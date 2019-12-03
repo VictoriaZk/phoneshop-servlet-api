@@ -7,6 +7,7 @@ import com.es.phoneshop.model.exception.IllegalQuantityException;
 import com.es.phoneshop.model.exception.LackOfStockException;
 import com.es.phoneshop.model.product.ArrayListProductDao;
 import com.es.phoneshop.model.product.ProductDao;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -58,7 +59,7 @@ public class CartPageServlet extends HttpServlet {
         Cart cart = cartService.getCart(request.getSession());
         for (int i = 0; i < productsIds.length; i++) {
             try {
-                cartService.update(request.getSession(),cart, productsIds, quantities, request.getLocale());
+                cartService.update(request.getSession(), cart, productsIds, quantities, request.getLocale());
             } catch (NumberFormatException e) {
                 errors[i] = "Quantity should be a number";
             } catch (IllegalQuantityException | LackOfStockException e) {
