@@ -54,29 +54,35 @@
     <form method="post">
         <p>
             <label for="firstName">First name</label>
-            <input id="firstName" name="firstName" value="${firstName}"/>
+            <input id="firstName" name="firstName" value="${empty firstNameError[status.index]
+                                                                    ? firstName
+                                                                    : firstNameError[status.index]}"/>
         </p>
         <c:if test="${not empty firstNameError}">
             <p>
-                <span class = "class-color-red">${firstNameError}</span>
+                <span class="class-color-red">${firstNameError}</span>
             </p>
         </c:if>
         <p>
             <label for="lastName">Last name</label>
-            <input id="lastName" name="lastName" value="${lastName}"/>
+            <input id="lastName" name="lastName" value="${empty lastNameError[status.index]
+                                                                  ?lastName
+                                                                  :lastNameError[status.index]}"/>
         </p>
         <c:if test="${not empty lastNameError}">
             <p>
-                <span class = "class-color-red">${lastNameError}</span>
+                <span class="class-color-red">${lastNameError}</span>
             </p>
         </c:if>
         <p>
             <label for="phone">Phone</label>
-            <input id="phone" name="phone" value="${phone}"/>
+            <input id="phone" name="phone" value="${phoneError[status.index]
+                                                      ?phone
+                                                      :phoneError[status.index]}"/>
         </p>
         <c:if test="${not empty phoneError}">
             <p>
-                <span class = "class-color-red">${phoneError}</span>
+                <span class="class-color-red">${phoneError}</span>
             </p>
         </c:if>
 
@@ -85,7 +91,8 @@
             <select id="deliveryMode" name="deliveryMode">
                 <c:forEach var="deliveryMode" items="${deliveryModes}">
                     <option value="${deliveryMode.description}">${deliveryMode.description}
-                        (${deliveryMode.price})</option>
+                        (${deliveryMode.price})
+                    </option>
                 </c:forEach>
             </select>
         </p>
@@ -100,11 +107,13 @@
         </p>
         <p>
             <label for="address">Address</label>
-            <input id="address" name="address" value="${address}"/>
+            <input id="address" name="address" value="${addressError[status.index]
+                                                           ?address
+                                                           :address[status.index]}"/>
         </p>
         <c:if test="${not empty addressError}">
             <p>
-                <span class = "class-color-red">${addressError}</span>
+                <span class="class-color-red">${addressError}</span>
             </p>
         </c:if>
 

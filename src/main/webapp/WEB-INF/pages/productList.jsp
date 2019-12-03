@@ -29,7 +29,8 @@
         <c:forEach var="product" items="${products}">
             <tr>
                 <td>
-                    <img class="product-tile" src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/${product.imageUrl}">
+                    <img class="product-tile"
+                         src="https://raw.githubusercontent.com/andrewosipenko/phoneshop-ext-images/master/${product.imageUrl}">
                 </td>
                 <td>
                     <a href="products/${product.id}">${product.description}</a>
@@ -37,7 +38,8 @@
                 <td class="price">
                     <div>
                         <a href="#popup${product.id}">
-                            <fmt:formatNumber value="${product.price}" type="currency" currencySymbol="${product.currency.symbol}"/>
+                            <fmt:formatNumber value="${product.price}" type="currency"
+                                              currencySymbol="${product.currency.symbol}"/>
                         </a>
                     </div>
                     <div id="popup${product.id}" class="overlay">
@@ -47,7 +49,8 @@
                             <a class="close" href="#">&times;</a>
                             <div class="content">
                                 <c:forEach var="historyOfPrices" items="${product.history}">
-                                    <p>${historyOfPrices.value.date} the price was <fmt:formatNumber value="${historyOfPrices.key}" type="currency" currencySymbol="&#36"/></p>
+                                    <p>${historyOfPrices.value.date} the price was <fmt:formatNumber
+                                            value="${historyOfPrices.key}" type="currency" currencySymbol="&#36"/></p>
                                 </c:forEach>
                             </div>
                         </div>

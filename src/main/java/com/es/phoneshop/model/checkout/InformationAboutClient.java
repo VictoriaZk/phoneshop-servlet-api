@@ -5,7 +5,7 @@ public class InformationAboutClient {
     private String lastName;
     private String phone;
 
-    public InformationAboutClient(){
+    public InformationAboutClient() {
     }
 
     public InformationAboutClient(String firstName, String lastName, String phone) {

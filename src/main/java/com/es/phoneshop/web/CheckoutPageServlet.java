@@ -4,6 +4,7 @@ import com.es.phoneshop.model.cart.Cart;
 import com.es.phoneshop.model.cart.CartService;
 import com.es.phoneshop.model.cart.HttpSessionCartService;
 import com.es.phoneshop.model.checkout.*;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,13 @@ public class CheckoutPageServlet extends HttpServlet {
     public static final String DELIVERY_MODES = "deliveryModes";
     public static final String DATES = "dates";
     public static final String PAYMENT_SYSTEMS = "paymentSystems";
+    public static final String FIRST_NAME_ERROR = "firstNameError";
+    public static final String LAST_NAME_ERROR = "lastNameError";
+    public static final String PHONE_ERROR = "phoneError";
+    public static final String ADDRESS_ERROR = "addressError";
+    public static final String DELIVERY_MODE = "deliveryMode";
+    public static final String DATE = "date";
+    public static final String PAYMENT_SYSTEM = "paymentSystem";
     private CartService cartService;
     private OrderService orderService;
 
@@ -54,13 +62,13 @@ public class CheckoutPageServlet extends HttpServlet {
     }
 
     private Optional<Order> createOrder(HttpServletRequest request) {
-        Optional<InformationAboutClient> optionalContactDetails = getInformationAboutClientFromRequest(request);
-        Optional<DeliverySystem> optionalDeliveryDetails = getDeliverySystemFromRequest(request);
+        Optional<InformationAboutClient> optionalInformationAboutClient = getInformationAboutClientFromRequest(request);
+        Optional<DeliverySystem> optionalDeliverySystem = getDeliverySystemFromRequest(request);
         PaymentSystem paymentSystem = getPaymentSystemFormRequest(request);
-        if (optionalContactDetails.isPresent() && optionalDeliveryDetails.isPresent()) {
+        if (optionalInformationAboutClient.isPresent() && optionalDeliverySystem.isPresent()) {
             Cart cart = cartService.getCart(request.getSession());
-            Order order = orderService.createOrder(cart, optionalContactDetails.get(),
-                    optionalDeliveryDetails.get(), paymentSystem);
+            Order order = orderService.createOrder(cart, optionalInformationAboutClient.get(),
+                    optionalDeliverySystem.get(), paymentSystem);
             orderService.placeOrder(order, cart);
             return Optional.of(order);
         } else {
@@ -80,17 +88,17 @@ public class CheckoutPageServlet extends HttpServlet {
         String firstName = request.getParameter(FIRST_NAME_PARAMETER);
         if (isIncorrect(firstName) || !CheckoutUtil.isValidFirstName(firstName)) {
             isSuccessful = false;
-            request.setAttribute("firstNameError", "Incorrect first name");
+            request.setAttribute(FIRST_NAME_ERROR, "Incorrect first name");
         }
         String lastName = request.getParameter(LAST_NAME_PARAMETER);
         if (isIncorrect(lastName) || !CheckoutUtil.isValidLastName(lastName)) {
             isSuccessful = false;
-            request.setAttribute("lastNameError", "Incorrect last name");
+            request.setAttribute(LAST_NAME_ERROR, "Incorrect last name");
         }
         String phone = request.getParameter(PHONE_PARAMETER);
         if (isIncorrect(phone) || !CheckoutUtil.isValidPhone(phone)) {
             isSuccessful = false;
-            request.setAttribute("phoneError", "Phone number should contain symbol '+' and 12 digits");
+            request.setAttribute(PHONE_ERROR, "Phone number should contain symbol '+' and 12 digits");
         }
         if (isSuccessful) {
             return Optional.of(new InformationAboutClient(firstName, lastName, phone));
@@ -104,11 +112,11 @@ public class CheckoutPageServlet extends HttpServlet {
         String address = request.getParameter(ADDRESS_PARAMETER);
         if (isIncorrect(address)) {
             isSuccessful = false;
-            request.setAttribute("addressError", "Incorrect address");
+            request.setAttribute(ADDRESS_ERROR, "Incorrect address");
         }
         if (isSuccessful) {
-            DeliveryMode deliveryMode = orderService.getDeliveryMode(request.getParameter("deliveryMode"));
-            DeliveryDate deliveryDate = orderService.getDeliveryDate(request.getParameter("date"));
+            DeliveryMode deliveryMode = orderService.getDeliveryMode(request.getParameter(DELIVERY_MODE));
+            DeliveryDate deliveryDate = orderService.getDeliveryDate(request.getParameter(DATE));
             return Optional.of(new DeliverySystem(deliveryMode, deliveryDate, address));
         } else {
             return Optional.empty();
@@ -116,7 +124,7 @@ public class CheckoutPageServlet extends HttpServlet {
     }
 
     private PaymentSystem getPaymentSystemFormRequest(HttpServletRequest request) {
-        return orderService.getPaymentSystem(request.getParameter("paymentSystem"));
+        return orderService.getPaymentSystem(request.getParameter(PAYMENT_SYSTEM));
     }
 
     private boolean isIncorrect(String value) {

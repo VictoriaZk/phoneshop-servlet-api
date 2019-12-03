@@ -34,16 +34,16 @@
     <form method="post" action="${thisPage}">
         <p>
             <c:if test="${not empty param.success}">
-                <p class="class-color-green">Successfully added</p>
-                <br>
-            </c:if>
-            <span>Quantity: </span>
-            <input name="quantity" value="${empty quantity ? 1 : quantity}" class="quantity"/>
-            <button type="submit">Add</button>
-            <c:if test="${not empty errorMessage}">
-                <br>
-                <p class="class-color-red">${errorMessage}</p>
-            </c:if>
+        <p class="class-color-green">Successfully added</p>
+        <br>
+        </c:if>
+        <span>Quantity: </span>
+        <input name="quantity" value="${empty quantity ? 1 : quantity}" class="quantity"/>
+        <button type="submit">Add</button>
+        <c:if test="${not empty errorMessage}">
+            <br>
+            <p class="class-color-red">${errorMessage}</p>
+        </c:if>
         </p>
     </form>
 

@@ -1,5 +1,8 @@
 package com.es.phoneshop.web;
 
+import com.es.phoneshop.model.checkout.ArrayListOrderDao;
+import com.es.phoneshop.model.checkout.Order;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,16 +13,18 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MiniCartServletTest {
+public class OrderOverviewServletTest {
+
+    public static final String ORDER = "order";
+    private OrderOverviewServlet servlet;
 
     @Mock
     private HttpServletRequest request;
@@ -28,25 +33,31 @@ public class MiniCartServletTest {
     private HttpServletResponse response;
 
     @Mock
-    private HttpSession session;
-
-    @Mock
     private RequestDispatcher dispatcher;
 
-    private MiniCartServlet servlet;
+    @Mock
+    private Order order;
 
     @Before
     public void setup() {
-        servlet = new MiniCartServlet();
-        when(request.getSession()).thenReturn(session);
+        servlet = new OrderOverviewServlet();
         when(request.getRequestDispatcher(anyString())).thenReturn(dispatcher);
+        String id = UUID.randomUUID().toString();
+        when(request.getPathInfo()).thenReturn("/" + id);
+        when(order.getId()).thenReturn(id);
+    }
+
+    @After
+    public void destroy() {
+        ArrayListOrderDao.getInstance().delete(order);
     }
 
     @Test
     public void testDoGet() throws ServletException, IOException {
+        ArrayListOrderDao.getInstance().save(order);
         servlet.init();
         servlet.doGet(request, response);
-        verify(request).setAttribute(anyString(), any());
-        verify(request.getRequestDispatcher(anyString())).include(request, response);
+        verify(request).setAttribute(ORDER, order);
+        verify(request.getRequestDispatcher(anyString())).forward(request, response);
     }
 }

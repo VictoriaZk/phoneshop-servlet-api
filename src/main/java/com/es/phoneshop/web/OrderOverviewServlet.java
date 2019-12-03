@@ -4,6 +4,7 @@ import com.es.phoneshop.model.checkout.ArrayListOrderDao;
 import com.es.phoneshop.model.checkout.Order;
 import com.es.phoneshop.model.checkout.OrderDao;
 import com.es.phoneshop.model.exception.OrderNotFoundException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class OrderOverviewServlet extends HttpServlet {
+    public static final String ORDER = "order";
     private OrderDao orderDao;
 
     @Override
@@ -27,7 +29,7 @@ public class OrderOverviewServlet extends HttpServlet {
         } catch (OrderNotFoundException e) {
             e.printStackTrace();
         }
-        request.setAttribute("order", order);
+        request.setAttribute(ORDER, order);
         request.getRequestDispatcher("/WEB-INF/pages/orderOverview.jsp").forward(request, response);
     }
 

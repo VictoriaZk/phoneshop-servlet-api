@@ -8,7 +8,7 @@ public class DeliverySystem {
     private BigDecimal price;
     private String address;
 
-    public DeliverySystem(){
+    public DeliverySystem() {
     }
 
     public DeliverySystem(DeliveryMode mode, DeliveryDate date, String address) {

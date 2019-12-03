@@ -3,13 +3,14 @@ package com.es.phoneshop.model.checkout;
 import com.es.phoneshop.model.cart.Cart;
 import com.es.phoneshop.model.cart.CartItem;
 import com.es.phoneshop.model.cart.HttpSessionCartService;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class HttpSessionOrderService implements OrderService{
+public class HttpSessionOrderService implements OrderService {
     private static volatile OrderService INSTANCE;
 
     private HttpSessionOrderService() {

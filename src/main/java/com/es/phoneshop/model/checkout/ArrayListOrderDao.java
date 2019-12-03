@@ -1,6 +1,7 @@
 package com.es.phoneshop.model.checkout;
 
 import com.es.phoneshop.model.exception.OrderNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ public class ArrayListOrderDao implements OrderDao {
     private static final OrderDao INSTANCE = new ArrayListOrderDao();
     private List<Order> orders;
 
-    private ArrayListOrderDao(){
+    private ArrayListOrderDao() {
         orders = new ArrayList<>();
     }
 
@@ -29,18 +30,10 @@ public class ArrayListOrderDao implements OrderDao {
         if (order == null || order.getId() == null) {
             throw new IllegalArgumentException("Order or order id can not be null");
         }
-
-        Order orderWithSameId;
-        try {
-            orderWithSameId = getOrder(order.getId());
-        } catch (OrderNotFoundException exception) {
-            orderWithSameId = null;
-        }
-
-        if (orderWithSameId == null) {
-            orders.add(order);
+        if (orders.contains(order)) {
+            throw new IllegalArgumentException("Order with such id is already exits");
         } else {
-            throw new IllegalArgumentException("Order with such id is already exists");
+            orders.add(order);
         }
     }
 
