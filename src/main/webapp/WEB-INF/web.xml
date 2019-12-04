@@ -99,4 +99,26 @@
         <exception-type>com.es.phoneshop.model.exception.OrderNotFoundException</exception-type>
         <location>/WEB-INF/pages/exceptionPage.jsp</location>
     </error-page>
+
+    <servlet>
+        <servlet-name>productReview</servlet-name>
+        <servlet-class>com.es.phoneshop.web.ProductReviewServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>productReview</servlet-name>
+        <url-pattern>/review</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>welcomePage</servlet-name>
+        <servlet-class>com.es.phoneshop.web.WelcomePageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>welcomePage</servlet-name>
+        <url-pattern>/welcome</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

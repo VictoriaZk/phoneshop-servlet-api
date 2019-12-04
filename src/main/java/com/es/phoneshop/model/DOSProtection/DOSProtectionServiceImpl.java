@@ -12,7 +12,7 @@ public class DOSProtectionServiceImpl implements DOSProtectionService {
 
     private volatile long lastCleaningTime = System.currentTimeMillis();
 
-    private static final int LIMIT_REQUESTS_PER_IP = 20;
+    private static final int LIMIT_REQUESTS_PER_IP = 200;
 
     private static final int MINUTE = 60_000;
 

@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ProductDetailsPageServlet extends HttpServlet {
     public static final String VIEWED_PRODUCTS = "viewedProducts";
@@ -39,7 +41,10 @@ public class ProductDetailsPageServlet extends HttpServlet {
         request.setAttribute(VIEWED_PRODUCTS, dequeViewedProducts);
         viewedProducts.addViewedProducts(viewedProducts.getViewedProducts(request.getSession()), product);
         request.setAttribute(PRODUCT, productDao.getProduct(extractId(request)));
+        request.setAttribute("review", productDao.getProduct(extractId(request)));
         request.getRequestDispatcher("/WEB-INF/pages/productDetails.jsp").forward(request, response);
+
+
     }
 
     @Override
@@ -75,4 +80,6 @@ public class ProductDetailsPageServlet extends HttpServlet {
     private Long extractId(HttpServletRequest request) {
         return Long.parseLong(request.getPathInfo().replaceAll("/", ""));
     }
+
+
 }

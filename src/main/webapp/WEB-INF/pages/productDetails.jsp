@@ -46,6 +46,70 @@
         </c:if>
         </p>
     </form>
+    <br>
 
+    <form method="post">
+        <c:if test="${not empty param.successReview}">
+            <p>
+                <span style="color: green">Successfully added</span>
+            </p>
+        </c:if>
+        <c:if test="${not empty param.reviewErrorMessage}">
+            <p>
+                <span style="color: red">Input error: ${param.reviewErrorMessage}</span>
+            </p>
+        </c:if>
+        <p>
+            <label for="username">Username</label>
+            <input id="username" name="username" value="${username}"/>
+        </p>
+        <p>
+            <label for="rating">Rating</label>
+            <input id="rating" name="rating" value="${rating}"/>
+        </p>
+        <p>
+            <label for="text">Text</label>
+            <input id="text" name="text" value="${textError}"/>
+        </p>
+
+        <p>
+            <c:url value="/review/${product.id}" var="placeReviewUrl"/>
+            <button formaction="${placeReviewUrl}">Place</button>
+        </p>
+    </form>
+
+    <form>
+        <c:url value="/review" var="reviewUrl"/>
+        <button formaction="${reviewUrl}">Add review</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <td>
+                Username
+            </td>
+            <td>
+                Rating
+            </td>
+            <td>
+                Text
+            </td>
+        </tr>
+        </thead>
+        <c:forEach var="review" items="${reviewes}">
+            <tr>
+                <td>
+                        ${review.userName}
+                </td>
+                <td>
+                        ${review.rating}
+                </td>
+                <td>
+                        ${review.text}
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
     <tags:recentlyViewed products="${recentlyViewedProducts}"/>
 </tags:master>
