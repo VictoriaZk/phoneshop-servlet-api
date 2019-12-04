@@ -46,6 +46,41 @@
         </c:if>
         </p>
     </form>
+    <br>
 
+
+    <form>
+        <c:url value="/reviewes" var="reviewesUrl"/>
+        <button formaction="${reviewesUrl}">Add review</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <td>
+                Username
+            </td>
+            <td>
+                Rating
+            </td>
+            <td>
+                Text
+            </td>
+        </tr>
+        </thead>
+        <c:forEach var="review" items="${reviewes}">
+            <tr>
+                <td>
+                        ${review.userName}
+                </td>
+                <td>
+                        ${review.rating}
+                </td>
+                <td>
+                        ${review.text}
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
     <tags:recentlyViewed products="${recentlyViewedProducts}"/>
 </tags:master>

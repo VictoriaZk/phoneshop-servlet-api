@@ -18,6 +18,10 @@
         Cart
         <img src="${pageContext.servletContext.contextPath}/images/cart.jpg"/>
     </a>
+    <c:url value="/reviewes" var="reviewesUrl"/>
+    <a href="${reviewesUrl}">
+        Product reviewes
+    </a>
 </header>
 <main>
     <jsp:doBody/>
