@@ -48,39 +48,10 @@
     </form>
     <br>
 
-    <form method="post">
-        <c:if test="${not empty param.successReview}">
-            <p>
-                <span style="color: green">Successfully added</span>
-            </p>
-        </c:if>
-        <c:if test="${not empty param.reviewErrorMessage}">
-            <p>
-                <span style="color: red">Input error: ${param.reviewErrorMessage}</span>
-            </p>
-        </c:if>
-        <p>
-            <label for="username">Username</label>
-            <input id="username" name="username" value="${username}"/>
-        </p>
-        <p>
-            <label for="rating">Rating</label>
-            <input id="rating" name="rating" value="${rating}"/>
-        </p>
-        <p>
-            <label for="text">Text</label>
-            <input id="text" name="text" value="${textError}"/>
-        </p>
-
-        <p>
-            <c:url value="/review/${product.id}" var="placeReviewUrl"/>
-            <button formaction="${placeReviewUrl}">Place</button>
-        </p>
-    </form>
 
     <form>
-        <c:url value="/review" var="reviewUrl"/>
-        <button formaction="${reviewUrl}">Add review</button>
+        <c:url value="/reviewes" var="reviewesUrl"/>
+        <button formaction="${reviewesUrl}">Add review</button>
     </form>
 
     <table>

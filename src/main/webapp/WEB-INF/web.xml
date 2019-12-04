@@ -4,6 +4,15 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <display-name>Phoneshop servlet api training</display-name>
+    <servlet>
+        <servlet-name>welcomePage</servlet-name>
+        <servlet-class>com.es.phoneshop.web.WelcomePageServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>welcomePage</servlet-name>
+        <url-pattern>/welcome</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>productList</servlet-name>
@@ -107,18 +116,9 @@
 
     <servlet-mapping>
         <servlet-name>productReview</servlet-name>
-        <url-pattern>/review</url-pattern>
+        <url-pattern>/reviewes</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>welcomePage</servlet-name>
-        <servlet-class>com.es.phoneshop.web.WelcomePageServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>welcomePage</servlet-name>
-        <url-pattern>/welcome</url-pattern>
-    </servlet-mapping>
 
 
 </web-app>

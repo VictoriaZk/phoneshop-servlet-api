@@ -15,5 +15,6 @@ public class WelcomePageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("friendUrl", request.getParameter("friendUrl"));
+        request.getRequestDispatcher("/WEB-INF/pages/welcomePage.jsp").forward(request, response);
     }
 }

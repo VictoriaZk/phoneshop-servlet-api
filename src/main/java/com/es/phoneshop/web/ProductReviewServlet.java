@@ -1,7 +1,6 @@
 package com.es.phoneshop.web;
 
 import com.es.phoneshop.model.product.*;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ public class ProductReviewServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("reviews", ArrayListProductReview.getInstance().getProductReviews(productDao.getProduct(extractId(request))));
+        request.setAttribute("review", productReviewDao.getProductReviews());
         request.getRequestDispatcher("/WEB-INF/pages/productReviews.jsp").forward(request, response);
     }
 
